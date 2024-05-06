@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using cwiczenia4.Models;
 
 namespace WebApplication1.Services
 {
     public class AnimalDbService : IAnimalDbService
     {
-        private readonly string _connectionString = "Data Source=db-mssql.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True";
+        private readonly string _connectionString = "Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True";
 
         public IEnumerable<Animal> GetAnimals(string orderBy)
         {
@@ -16,7 +15,7 @@ namespace WebApplication1.Services
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
-                com.CommandText = $"SELECT * FROM Animals ORDER BY {orderBy}";
+                com.CommandText = $"SELECT * FROM Animal ORDER BY {orderBy}";
 
                 con.Open();
                 var dr = com.ExecuteReader();
@@ -36,6 +35,36 @@ namespace WebApplication1.Services
             }
 
             return animals;
+        }
+        
+        
+        public Animal GetAnimalById(int id)
+        {
+            using (var con = new SqlConnection(_connectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                com.CommandText = "SELECT * FROM Animal WHERE IdAnimal = @IdAnimal";
+                com.Parameters.AddWithValue("@IdAnimal", id);
+
+                con.Open();
+                var dr = com.ExecuteReader();
+                if (dr.Read())
+                {
+                    var animal = new Animal
+                    {
+                        IdAnimal = (int)dr["IdAnimal"],
+                        Name = dr["Name"].ToString(),
+                        Description = dr["Description"].ToString(),
+                        Category = dr["Category"].ToString(),
+                        Area = dr["Area"].ToString()
+                    };
+
+                    return animal;
+                }
+
+                return null;
+            }
         }
 
         public void AddAnimal(Animal newAnimal)

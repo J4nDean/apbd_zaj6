@@ -16,13 +16,29 @@ namespace WebApplication1.Controllers
         {
             _service = service;
         }
-
+        
+        
+        
         [HttpGet]
         public IActionResult GetAnimals(string orderBy = "name")
         {
             var animals = _service.GetAnimals(orderBy);
             return Ok(animals);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetAnimalById(int id)
+        {
+            var animal = _service.GetAnimalById(id);
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(animal);
+        }
+        
+
 
         [HttpPost]
         public IActionResult CreateAnimal(Animal newAnimal)
