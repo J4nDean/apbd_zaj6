@@ -3,7 +3,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Services
 {
-    public interface IAnimalDbService
+    public interface IAnimalsDbService
     {
         IEnumerable<Animal> GetAnimals(string orderBy);
         Animal GetAnimalById(int id);

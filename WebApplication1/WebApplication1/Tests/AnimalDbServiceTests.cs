@@ -6,12 +6,12 @@ using Xunit.Abstractions;
 
 public class AnimalDbServiceTests
 {
-    private readonly Mock<IAnimalDbService> _animalDbServiceMock;
+    private readonly Mock<IAnimalsDbService> _animalDbServiceMock;
     private readonly ITestOutputHelper _output; 
 
     public AnimalDbServiceTests(ITestOutputHelper output) 
     {
-        _animalDbServiceMock = new Mock<IAnimalDbService>();
+        _animalDbServiceMock = new Mock<IAnimalsDbService>();
         _output = output; 
     }
 

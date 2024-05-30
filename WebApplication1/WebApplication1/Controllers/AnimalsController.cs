@@ -8,9 +8,9 @@ namespace WebApplication1.Controllers
     [Route("api/[controller]")]
     public class AnimalsController : ControllerBase
     {
-        private readonly IAnimalDbService _service;
+        private readonly IAnimalsDbService _service;
 
-        public AnimalsController(IAnimalDbService service)
+        public AnimalsController(IAnimalsDbService service)
         {
             _service = service;
         }
@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
             _service.AddAnimal(newAnimal);
             return CreatedAtAction(nameof(GetAnimals), new { id = newAnimal.IdAnimal }, newAnimal);
         }
-
+ 
         [HttpPut("{id}")]
         public IActionResult UpdateAnimal(int id, Animal updatedAnimal)
         {

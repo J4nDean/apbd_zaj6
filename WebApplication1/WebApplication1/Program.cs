@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IAnimalDbService, AnimalDbService>();
+builder.Services.AddTransient<IAnimalsDbService, AnimalsDbService>();
 
 var app = builder.Build();
 

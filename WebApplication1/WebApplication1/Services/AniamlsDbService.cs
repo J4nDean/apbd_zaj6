@@ -3,7 +3,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Services
 {
-    public class AnimalDbService : IAnimalDbService
+    public class AnimalsDbService : IAnimalsDbService
     {
         private readonly string _connectionString = "Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True";
 
