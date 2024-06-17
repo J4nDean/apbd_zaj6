@@ -5,7 +5,8 @@ namespace WebApplication1.Services
 {
     public class AnimalsDbService : IAnimalsDbService
     {
-        private readonly string _connectionString = "Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True";
+        private readonly string _connectionString =
+            "Data Source=db-mssql16.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True";
 
         public IEnumerable<Animal> GetAnimals(string orderBy)
         {
@@ -36,36 +37,7 @@ namespace WebApplication1.Services
 
             return animals;
         }
-        
-        
-        public Animal GetAnimalById(int id)
-        {
-            using (var con = new SqlConnection(_connectionString))
-            using (var com = new SqlCommand())
-            {
-                com.Connection = con;
-                com.CommandText = "SELECT * FROM Animal WHERE IdAnimal = @IdAnimal";
-                com.Parameters.AddWithValue("@IdAnimal", id);
 
-                con.Open();
-                var dr = com.ExecuteReader();
-                if (dr.Read())
-                {
-                    var animal = new Animal
-                    {
-                        IdAnimal = (int)dr["IdAnimal"],
-                        Name = dr["Name"].ToString(),
-                        Description = dr["Description"].ToString(),
-                        Category = dr["Category"].ToString(),
-                        Area = dr["Area"].ToString()
-                    };
-
-                    return animal;
-                }
-
-                return null;
-            }
-        }
 
         public void AddAnimal(Animal newAnimal)
         {
@@ -73,7 +45,8 @@ namespace WebApplication1.Services
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
-                com.CommandText = "INSERT INTO Animals(Name, Description, Category, Area) VALUES (@Name, @Description, @Category, @Area)";
+                com.CommandText =
+                    "INSERT INTO Animal(Name, Description, Category, Area) VALUES (@Name, @Description, @Category, @Area)";
 
                 com.Parameters.AddWithValue("@Name", newAnimal.Name);
                 com.Parameters.AddWithValue("@Description", newAnimal.Description);
@@ -91,7 +64,8 @@ namespace WebApplication1.Services
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
-                com.CommandText = "UPDATE Animals SET Name = @Name, Description = @Description, Category = @Category, Area = @Area WHERE IdAnimal = @IdAnimal";
+                com.CommandText =
+                    "UPDATE Animal SET Name = @Name, Description = @Description, Category = @Category, Area = @Area WHERE IdAnimal = @IdAnimal";
 
                 com.Parameters.AddWithValue("@IdAnimal", updatedAnimal.IdAnimal);
                 com.Parameters.AddWithValue("@Name", updatedAnimal.Name);
@@ -110,7 +84,7 @@ namespace WebApplication1.Services
             using (var com = new SqlCommand())
             {
                 com.Connection = con;
-                com.CommandText = "DELETE FROM Animals WHERE IdAnimal = @IdAnimal";
+                com.CommandText = "DELETE FROM Animal WHERE IdAnimal = @IdAnimal";
 
                 com.Parameters.AddWithValue("@IdAnimal", id);
 

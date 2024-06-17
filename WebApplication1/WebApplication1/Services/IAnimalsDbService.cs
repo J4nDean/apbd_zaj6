@@ -1,12 +1,10 @@
-﻿
-using WebApplication1.Models;
+﻿using WebApplication1.Models;
 
 namespace WebApplication1.Services
 {
     public interface IAnimalsDbService
     {
         IEnumerable<Animal> GetAnimals(string orderBy);
-        Animal GetAnimalById(int id);
         void AddAnimal(Animal newAnimal);
         void UpdateAnimal(Animal updatedAnimal);
         void DeleteAnimal(int id);
